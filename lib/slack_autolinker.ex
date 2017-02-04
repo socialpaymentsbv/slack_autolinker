@@ -19,7 +19,7 @@ defmodule SlackAutolinker do
   @default_repo_aliases %{
     "elixir" => "elixir-lang/elixir",
     "ecto" => "elixir-ecto/ecto",
-    "phoenixframework" => "phoenixframework/phoenix",
+    "phoenix" => "phoenixframework/phoenix",
   }
 
   @doc false
