@@ -3,6 +3,8 @@ defmodule SlackAutolinker.Bot do
 
   use Slack
   require Logger
+  
+  @link_separator ", "
 
   def handle_connect(slack, state) do
     Logger.info "Connected as #{slack.me.name}"
@@ -19,7 +21,7 @@ defmodule SlackAutolinker.Bot do
     links = SlackAutolinker.scan(text, repo_aliases)
 
     if links != [] do
-      text = Enum.join(links, "\n")
+      text = Enum.join(links, @link_separator)
       opts = %{parse: "none", username: username, icon_emoji: icon_emoji}
       Slack.Web.Chat.post_message(message.channel, text, opts)
     end
