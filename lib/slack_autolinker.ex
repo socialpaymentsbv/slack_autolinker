@@ -34,6 +34,7 @@ defmodule SlackAutolinker do
         :error -> []
       end
     end)
+    |> Enum.uniq
   end
 
   defp github_link({orig, repo, number}),
