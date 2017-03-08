@@ -32,7 +32,7 @@ defmodule SlackAutolinker.Bot do
 
   def handle_info(_, _, state), do: {:ok, state}
 
-  defp normalize_text(text) do
+  defp normalize_text(text) when is_binary(text) do
     Regex.replace(~r/<(http.*)\|(.*?)>/, text, "\\2")
   end
 end

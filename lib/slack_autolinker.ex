@@ -11,9 +11,9 @@ defmodule SlackAutolinker do
       ["<https://github.com/elixir-lang/elixir/issues/10|elixir#10>"]
 
   """
-  def scan(text, repo_aliases \\ %{}) do
+  def scan(text, repo_aliases \\ %{}) when is_binary(text) do
     extract(text, repo_aliases)
-    |> Enum.map(&github_link(&1))
+    |> Enum.map(&github_link/1)
   end
 
   @default_repo_aliases %{
