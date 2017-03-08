@@ -13,16 +13,14 @@ defmodule SlackAutolinker.Bot do
 
   def handle_event(%{subtype: "bot_message"}, _, state), do: {:ok, state}
   def handle_event(message = %{type: "message"}, _slack, state) do
-    repo_aliases = Application.get_env(:slack_autolinker, :repo_aliases) |> Poison.decode!
-    username = Application.get_env(:slack_autolinker, :username)
-    icon_emoji = Application.get_env(:slack_autolinker, :icon_emoji)
+    config = config()
 
     text = normalize_text(message.text)
-    links = SlackAutolinker.scan(text, repo_aliases)
+    links = SlackAutolinker.scan(text, config.repo_aliases)
 
     if links != [] do
       text = Enum.join(links, @link_separator)
-      opts = %{parse: "none", username: username, icon_emoji: icon_emoji}
+      opts = %{parse: "none", username: config.username, icon_emoji: config.icon_emoji}
       Slack.Web.Chat.post_message(message.channel, text, opts)
     end
 
@@ -34,5 +32,11 @@ defmodule SlackAutolinker.Bot do
 
   defp normalize_text(text) when is_binary(text) do
     Regex.replace(~r/<(http.*)\|(.*?)>/, text, "\\2")
+  end
+
+  defp config do
+    %{repo_aliases: Application.get_env(:slack_autolinker, :repo_aliases) |> Poison.decode!(),
+      username: Application.get_env(:slack_autolinker, :username),
+      icon_emoji: Application.get_env(:slack_autolinker, :icon_emoji)}
   end
 end
