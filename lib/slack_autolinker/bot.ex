@@ -12,10 +12,10 @@ defmodule SlackAutolinker.Bot do
   end
 
   def handle_event(%{subtype: "bot_message"}, _, state), do: {:ok, state}
-  def handle_event(message = %{type: "message"}, _slack, state) do
+  def handle_event(message = %{type: "message", text: text}, _slack, state) do
     config = config()
 
-    text = normalize_text(message.text)
+    text = normalize_text(text)
     links = SlackAutolinker.scan(text, config.repo_aliases)
 
     if links != [] do
