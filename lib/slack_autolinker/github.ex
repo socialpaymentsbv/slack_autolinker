@@ -17,7 +17,7 @@ defmodule SlackAutolinker.GitHub.Real do
   def get_issue(owner, repo, number) do
     case request("/repos/#{owner}/#{repo}/issues/#{number}") do
       {:ok, payload} ->
-        %Issue{number: payload["number"], title: payload["title"]}
+        {:ok, %Issue{number: payload["number"], title: payload["title"]}}
       other ->
         other
     end
@@ -44,6 +44,10 @@ end
 defmodule SlackAutolinker.GitHub.Fake do
   @behaviour SlackAutolinker.GitHub
   alias SlackAutolinker.GitHub.Issue
+
+  def get_issue(_owner, _repo, "404") do
+    {:error, :fake_reason}
+  end
 
   def get_issue(owner, repo, number) do
     {:ok, %Issue{number: number, title: "Test: #{owner}/#{repo}##{number}"}}
