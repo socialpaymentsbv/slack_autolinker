@@ -55,7 +55,7 @@ defmodule SlackAutolinker do
     Regex.scan(~r/#{repo_pattern}#(\d+)/i, String.downcase(text))
     |> Enum.flat_map(fn [orig, repo_alias, number] ->
       case Map.fetch(repo_aliases, repo_alias) do
-        {:ok, repo} -> [{orig, repo, number}]
+        {:ok, repo} -> [{orig, repo, String.to_integer(number)}]
         :error -> []
       end
     end)

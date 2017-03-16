@@ -5,8 +5,9 @@ defmodule SlackAutolinker.GitHub do
 
   @type owner :: String.t
   @type repo  :: String.t
+  @type num   :: integer
 
-  @callback get_issue(owner, repo, number) :: {:ok, Issue.t} :: {:error, term}
+  @callback get_issue(owner, repo, num) :: {:ok, Issue.t} :: {:error, term}
 end
 
 defmodule SlackAutolinker.GitHub.Real do
@@ -45,7 +46,7 @@ defmodule SlackAutolinker.GitHub.Fake do
   @behaviour SlackAutolinker.GitHub
   alias SlackAutolinker.GitHub.Issue
 
-  def get_issue(_owner, _repo, "404") do
+  def get_issue(_owner, _repo, 404) do
     {:error, :fake_reason}
   end
 
