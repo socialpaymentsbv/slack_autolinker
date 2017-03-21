@@ -4,8 +4,6 @@ defmodule SlackAutolinker.Bot do
   use Slack
   require Logger
   
-  @link_separator ", "
-
   def handle_connect(slack, state) do
     Logger.info "Connected as #{slack.me.name}"
     {:ok, state}
@@ -14,14 +12,11 @@ defmodule SlackAutolinker.Bot do
   def handle_event(%{subtype: "bot_message"}, _, state), do: {:ok, state}
   def handle_event(message = %{type: "message", text: text}, _slack, state) do
     config = config()
+    reply = SlackAutolinker.reply(normalize_text(text), config.repo_aliases)
 
-    text = normalize_text(text)
-    links = SlackAutolinker.scan(text, config.repo_aliases)
-
-    if links != [] do
-      text = Enum.join(links, @link_separator)
+    if reply do
       opts = %{parse: "none", username: config.username, icon_emoji: config.icon_emoji}
-      Slack.Web.Chat.post_message(message.channel, text, opts)
+      Slack.Web.Chat.post_message(message.channel, reply, opts)
     end
 
     {:ok, state}
