@@ -4,7 +4,6 @@ defmodule SlackAutolinker do
     "ecto" => "elixir-ecto/ecto",
     "phoenix" => "phoenixframework/phoenix",
   }
-  @link_separator ", "
   @github Application.get_env(:slack_autolinker, :github_adapter)
 
   alias SlackAutolinker.GitHub.Issue
@@ -15,11 +14,7 @@ defmodule SlackAutolinker do
       [] ->
         nil
       links ->
-        if String.contains?(text, "!new") do
-          links_with_titles(links)
-        else
-          Enum.map_join(links, @link_separator, &github_link/1)
-        end
+        links_with_titles(links)
     end
   end
 
