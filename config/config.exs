@@ -6,4 +6,4 @@ config :slack_autolinker,
   username: "autolinker",
   icon_emoji: ":anchor:"
 
-config :slack, api_token: (System.get_env("SLACK_TOKEN") || raise "SLACK_TOKEN missing")
+import_config "#{Mix.env}.exs"
