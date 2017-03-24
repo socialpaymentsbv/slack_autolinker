@@ -1,0 +1,18 @@
+{
+  "name": "slack_autolinker",
+  "scripts": {},
+  "env": {
+    "BOT_ICON_EMOJI": ":construction:",
+    "BOT_REPO_ALIASES": { "required": true },
+    "BOT_USERNAME": "autolinker-pr-review",
+    "GITHUB_TOKEN": { "required": true },
+    "SLACK_TOKEN": { "required": true }
+  },
+  "formation": {},
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "https://github.com/HashNuke/heroku-buildpack-elixir"
+    }
+  ]
+}
