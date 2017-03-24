@@ -15,7 +15,9 @@ defmodule SlackAutolinker.Bot do
     reply = SlackAutolinker.reply(normalize_text(text), config.repo_aliases)
 
     if reply do
-      opts = %{parse: "none", username: config.username, icon_emoji: config.icon_emoji}
+      icon = if config.icon_url, do: %{icon_url: config.icon_url}, else: %{icon_emoji: config.icon_emoji}
+      opts = Map.merge(icon, %{parse: "none", username: config.username})
+
       Slack.Web.Chat.post_message(message.channel, reply, opts)
     end
 
@@ -32,6 +34,7 @@ defmodule SlackAutolinker.Bot do
   defp config do
     %{repo_aliases: Application.get_env(:slack_autolinker, :repo_aliases) |> Poison.decode!(),
       username: Application.get_env(:slack_autolinker, :username),
-      icon_emoji: Application.get_env(:slack_autolinker, :icon_emoji)}
+      icon_emoji: Application.get_env(:slack_autolinker, :icon_emoji),
+      icon_url: Application.get_env(:slack_autolinker, :icon_url)}
   end
 end
