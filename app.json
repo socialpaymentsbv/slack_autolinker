@@ -4,7 +4,7 @@
   "env": {
     "BOT_ICON_EMOJI": ":construction:",
     "BOT_REPO_ALIASES": { "required": true },
-    "BOT_USERNAME": "autolinker-pr-review",
+    "BOT_USERNAME": { "required": true },
     "GITHUB_TOKEN": { "required": true },
     "SLACK_TOKEN": { "required": true }
   },
