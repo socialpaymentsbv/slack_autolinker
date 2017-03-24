@@ -16,4 +16,4 @@ config :slack_autolinker,
   github_adapter: github_adapter,
   github_token: (System.get_env("GITHUB_TOKEN") || raise "GITHUB_TOKEN missing")
 
-config :slack, api_token: (System.get_env("SLACK_TOKEN") || raise "SLACK_TOKEN missing")
+import_config "#{Mix.env}.exs"

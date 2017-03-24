@@ -7,6 +7,7 @@ defmodule SlackAutolinker.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     aliases: aliases(),
      deps: deps()]
   end
 
@@ -23,5 +24,9 @@ defmodule SlackAutolinker.Mixfile do
       {:poison, "~> 3.0"},
       {:slack, "~> 0.9.3"},
     ]
+  end
+
+  defp aliases do
+    ["test": ["test --no-start"]]
   end
 end
