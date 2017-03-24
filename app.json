@@ -15,16 +15,14 @@
       "url": "https://github.com/HashNuke/heroku-buildpack-elixir"
     }
   ],
-	{
-		"environments": {
-			"test": {
-				"env": {
-					"BOT_REPO_ALIASES": "{}",
-					"BOT_USERNAME": "test",
-					"GITHUB_TOKEN": "dummy",
-					"SLACK_TOKEN": "dummy"
-				}
-			}
-		}
-	}
+  "environments": {
+    "test": {
+      "env": {
+        "BOT_REPO_ALIASES": "{}",
+        "BOT_USERNAME": "test",
+        "GITHUB_TOKEN": "dummy",
+        "SLACK_TOKEN": "dummy"
+      }
+    }
+  }
 }
