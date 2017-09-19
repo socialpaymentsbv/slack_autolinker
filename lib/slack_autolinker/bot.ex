@@ -12,7 +12,7 @@ defmodule SlackAutolinker.Bot do
   def handle_event(%{subtype: "bot_message"}, _, state), do: {:ok, state}
   def handle_event(message = %{type: "message", text: text}, _slack, state) do
     config = config()
-    reply = SlackAutolinker.reply(normalize_text(text), config.repo_aliases)
+    reply = SlackAutolinker.reply(normalize_text(text), config)
 
     if reply do
       icon = if config.icon_url, do: %{icon_url: config.icon_url}, else: %{icon_emoji: config.icon_emoji}
@@ -32,7 +32,8 @@ defmodule SlackAutolinker.Bot do
   end
 
   defp config do
-    %{repo_aliases: Application.get_env(:slack_autolinker, :repo_aliases) |> Poison.decode!(),
+    %{github_repo_aliases: Application.get_env(:slack_autolinker, :github_repo_aliases) |> Poison.decode!(),
+      clubhouse_project_aliases: Application.get_env(:slack_autolinker, :clubhouse_project_aliases) |> Poison.decode!(),
       username: Application.get_env(:slack_autolinker, :username),
       icon_emoji: Application.get_env(:slack_autolinker, :icon_emoji),
       icon_url: Application.get_env(:slack_autolinker, :icon_url)}

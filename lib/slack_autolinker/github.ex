@@ -8,6 +8,10 @@ defmodule SlackAutolinker.GitHub do
   @type num   :: integer
 
   @callback get_issue(owner, repo, num) :: {:ok, Issue.t} :: {:error, term}
+
+  def to_link({orig, repo, number}), do: "<#{github_url(repo, number)}|#{orig}>"
+
+  defp github_url(repo, number), do: "https://github.com/#{repo}/issues/#{number}"
 end
 
 defmodule SlackAutolinker.GitHub.Real do
