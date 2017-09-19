@@ -33,9 +33,16 @@ defmodule SlackAutolinker.Bot do
 
   defp config do
     %{github_repo_aliases: Application.get_env(:slack_autolinker, :github_repo_aliases) |> Poison.decode!(),
-      clubhouse_project_aliases: Application.get_env(:slack_autolinker, :clubhouse_project_aliases) |> Poison.decode!(),
+      clubhouse_project_aliases: Application.get_env(:slack_autolinker, :clubhouse_project_aliases) |> Poison.decode!() |> to_clubhouse_aliases(),
       username: Application.get_env(:slack_autolinker, :username),
       icon_emoji: Application.get_env(:slack_autolinker, :icon_emoji),
       icon_url: Application.get_env(:slack_autolinker, :icon_url)}
+  end
+
+  defp to_clubhouse_aliases(aliases) do
+    aliases
+    |> Enum.map(fn({alias, %{"project" => project, "token" => token}}) ->
+      %{alias => {project, token}}
+    end)
   end
 end
