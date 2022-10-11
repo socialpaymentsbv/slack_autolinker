@@ -6,9 +6,10 @@ A Slack bot that autolinks things.
 
 ## Live testing
 
-For staging environment, just DM @clippy-stag in clubcollect.slack.com. 
-For production, it is already integrated with related channels, but you can also DM @clippy-stag in same workspace. 
+_(for @socialpaymentsbv developers)_
 
-## License
+For staging environment, just DM @clippy-stag in https://clubcollect.slack.com. But first make sure that the staging app 
+has at least one dyno unit setup.
+Production is already integrated with related channels. There you can DM @clippy. 
 
 MIT
