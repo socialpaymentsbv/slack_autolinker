@@ -19,10 +19,10 @@ defmodule SlackAutolinker.Mixfile do
   defp deps do
     [
       {:cowboy, "~> 1.0.0"},
-      {:httpoison, "~> 0.9"},
+      {:httpoison, "~> 1.2"},
       {:plug, "~> 1.0"},
       {:poison, "~> 3.0"},
-      {:slack, "~> 0.9.3"},
+      {:slack, "~> 0.23.5"},
     ]
   end
 
