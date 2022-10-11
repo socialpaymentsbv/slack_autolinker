@@ -12,4 +12,7 @@ For staging environment, just DM @clippy-stag in https://clubcollect.slack.com. 
 has at least one dyno unit setup.
 Production is already integrated with related channels. There you can DM @clippy. 
 
-MIT
+## Copyright and License
+
+Copyright (c) 2017-2022 NLCollect B.V.
+The source code is licensed under [The MIT License (MIT)](LICENSE.md)
