@@ -1,6 +1,6 @@
 {
   "name": "slack_autolinker",
-  "stack": "heroku-20",
+  "stack": "heroku-22",
   "scripts": {},
   "env": {
     "BOT_ICON_EMOJI": ":construction:",
