@@ -23,6 +23,7 @@ defmodule SlackAutolinker.Mixfile do
       {:plug, "~> 1.0"},
       {:poison, "~> 3.0"},
       {:slack, "~> 0.23.5"},
+      {:websocket_client, "~> 1.4", override: true}
     ]
   end
 
